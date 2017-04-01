@@ -273,6 +273,9 @@ void populate_gl_table(GtkWidget* gl_table)
 	GtkWidget* gl_ils_label = left_label("Image Load Store:");
 	GtkWidget* gl_ils_combo = CreateComboBoxFromVector(theApp.m_gs_gl_ext, "override_GL_ARB_shader_image_load_store");
 
+	AddTooltip(gl_gs_label, gl_gs_combo, IDC_GEOMETRY_SHADER_OVERRIDE);
+	AddTooltip(gl_ils_label, gl_ils_combo, IDC_IMAGE_LOAD_STORE);
+
 	s_table_line = 0;
 	InsertWidgetInTable(gl_table , gl_gs_label  , gl_gs_combo);
 	InsertWidgetInTable(gl_table , gl_ils_label , gl_ils_combo);
@@ -354,6 +357,8 @@ void populate_hack_table(GtkWidget* hack_table)
 	GtkWidget* hack_depth_check    = CreateCheckBox("Disable Depth Emulation", "UserHacks_DisableDepthSupport");
 	GtkWidget* hack_auto_flush     = CreateCheckBox("Auto Flush Primitives", "UserHacks_AutoFlush");
 	GtkWidget* hack_unscale_prim   = CreateCheckBox("Unscale Point&Line Primitives", "UserHacks_unscale_point_line");
+	GtkWidget* hack_merge_sprite   = CreateCheckBox("Merge Sprite", "UserHacks_merge_pp_sprite");
+	GtkWidget* hack_wrap_mem       = CreateCheckBox("Memory Wrapping", "wrap_gs_mem");
 
 	GtkWidget* hack_sprite_box     = CreateComboBoxFromVector(theApp.m_gs_hack, "UserHacks_SpriteHack");
 	GtkWidget* hack_sprite_label   = left_label("Alpha-Sprite Hack:");
@@ -378,6 +383,8 @@ void populate_hack_table(GtkWidget* hack_table)
 	AddTooltip(hack_depth_check, IDC_TC_DEPTH);
 	AddTooltip(hack_auto_flush, IDC_AUTO_FLUSH);
 	AddTooltip(hack_unscale_prim, IDC_UNSCALE_POINT_LINE);
+	AddTooltip(hack_merge_sprite, IDC_MERGE_PP_SPRITE);
+	AddTooltip(hack_wrap_mem, IDC_MEMORY_WRAPPING);
 	AddTooltip(trilinear_box, IDC_TRI_FILTER);
 	AddTooltip(trilinear_label, IDC_TRI_FILTER);
 
@@ -386,9 +393,10 @@ void populate_hack_table(GtkWidget* hack_table)
 	// Hack
 	InsertWidgetInTable(hack_table , hack_fast_inv       , hack_auto_flush);
 	InsertWidgetInTable(hack_table , hack_depth_check    , preload_gs_check);
+	InsertWidgetInTable(hack_table , hack_wrap_mem);
 	// Upscaling hack
 	InsertWidgetInTable(hack_table , hack_wild_check     , align_sprite_check);
-	InsertWidgetInTable(hack_table , hack_unscale_prim);
+	InsertWidgetInTable(hack_table , hack_unscale_prim   , hack_merge_sprite);
 	InsertWidgetInTable(hack_table , hack_offset_label   , hack_offset_box);
 	InsertWidgetInTable(hack_table , hack_sprite_label   , hack_sprite_box );
 	InsertWidgetInTable(hack_table , stretch_hack_label  , stretch_hack_box );
